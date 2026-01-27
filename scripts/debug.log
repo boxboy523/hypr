@@ -1,0 +1,20 @@
+=== 시작 ===
+[INFO] 메인 메뉴 -> 'w' 입력
+buffer =  ### dgamelaunch 1.5.1 - network console game launcher The following games are in progress: User Game Where Term Idle Viewers a) blase dcss-git L12 TeAE, Lair:2 80x 24 14m 38s 0 b) blister dcss-git L20 PoEn, Elf:1 80x 24 17m 40s 0 c) caiman dcss-git L14 KoEn, Lair:5 80x 24 0 d) circleofdust dcss-git L9 ReEE, D:7 80x 24 0 e) CNCPublicChat dcss-0.31-spriL1 TrCK, D 80x 24 24s 0 f) flipcanvas dcss-git L27 PoEn, Tomb:1 80x 24 11m 1s 0 g) guabamon dcss-git L12 FoFi, D:11 80x 24 0 h) gusrb771 dcss-git L4 NaFi, D:2 80x 24 0 i) hamnam dcss-git L27 OpIE, Zig:9 80x 24 0 j) himorime1 dcss-git 80x 24 3m 42s 0 k) lhg1003 dcss-git L4 MiBe, D:3 80x 24 3m 6s 0 l) magic0037 dcss-0.33 L14 MiFi, D:12 80x 24 0 m) Marronie dcss-git 80x 24 2h 52m 0 n) opg0315 dcss-git L6 PoEn, D:4 80x 24 1h 57m 0 o) Pinkiepie dcss-git L4 CoGl, D:4 80x 24 0 p) seneca325 dcss-git L4 MiFi, D:3 80x 24 16s 0 r) squeakweiz dcss-git L27 MiFi, Pan 80x 24 0 s) tifii dcss-git L1 MiFi, D:1 80x 24 0 t) WhiteBreeze dcss-git L4 ReMo, D:2 80x 24 1m 21s 0 u) zahalkas dcss-git L13 BaIE, Lair:3 80x 24 12m 55s 0 v) zoat dcss-git L3 KoBr, D:2 80x 24 0 (1-21 of 21) Watch which game? ('?' for help) =>
+match: a) blase dcss-git L12 TeAE, Lair:2 80x 24 14m 38s 0
+ username: blase
+ idle_part: 14m 38s
+
+SKIP: 'blase' (1분 이상 잠수)
+match: b) blister dcss-git L20 PoEn, Elf:1 80x 24 17m 40s 0
+ username: blister
+ idle_part: 17m 40s
+
+SKIP: 'blister' (1분 이상 잠수)
+match: c) caiman dcss-git L14 KoEn, Lair:5 80x 24 0
+ username: caiman
+ idle_part: 
+
+Target found: 'caiman'
+
+🥇 유저 진입 (caiman)

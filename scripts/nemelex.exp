@@ -1,5 +1,4 @@
 #!/usr/bin/env expect
-#!/usr/bin/expect
 
 # 1. 로그 파일 설정
 set log_filename "debug.log"

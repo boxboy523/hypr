@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 # expect 설치 확인
 if ! command -v expect &> /dev/null; then

@@ -1,14 +1,14 @@
 #!/usr/bin/env expect
 
 # 1. 로그 파일 설정
-set log_filename "debug.log"
-set log_file [open $log_filename "w"]
+#set log_filename "debug.log"
+#set log_file [open $log_filename "w"]
 
-proc log_debug {msg} {
-    global log_file
-    puts $log_file $msg
-    flush $log_file
-}
+#proc log_debug {msg} {
+#    global log_file
+#    puts $log_file $msg
+#    flush $log_file
+#}
 
 # ==========================================
 # 🧹 [NEW] 버퍼 세탁기 (ANSI -> 공백 치환)
@@ -21,7 +21,7 @@ proc clean_buffer_ansi {str} {
 
     # 2. 기타 잡다한 제어문자들 (혹시 모를 폰트설정 등) 제거
     regsub -all {\x1b[\(\)][A-Z0-9]} $cleaned " " cleaned
-    
+
     # 3. 중복 공백 정리 (스페이스바 여러 개를 한 개로) -> 파싱 예쁘게 하려고
     regsub -all {\s+} $cleaned " " final
     return $final
@@ -29,19 +29,19 @@ proc clean_buffer_ansi {str} {
 
 # 차단 목록
 set perm_blacklist {
-    "CNCPublicChat" "Sequell" "Cheibriados" 
+    "CNCPublicChat" "Sequell" "Cheibriados"
     "Gozag" "Qazlal" "Beogh" "Yiuf"
 }
 
 set recent_history {}
 set history_limit 5
 set timeout 30
-match_max 100000 
+match_max 100000
 
 set ssh_cmd "env TERM=xterm-256color ssh -p 1326 -oPubkeyAcceptedKeyTypes=+ssh-rsa -oHostKeyAlgorithms=+ssh-rsa nemelex@crawl.nemelex.cards"
 
 puts "🚀 Nemelex 배경 관전기 (Clean Buffer Architecture)"
-log_debug "=== 시작 ==="
+#log_debug "=== 시작 ==="
 
 spawn {*}$ssh_cmd
 
@@ -59,7 +59,7 @@ while {1} {
             set raw_buffer $expect_out(buffer)
 
             if {![string match "*Watch which game?*" $raw_buffer]} {
-                log_debug "\[INFO\] 메인 메뉴 -> 'w' 입력"
+#                log_debug "\[INFO\] 메인 메뉴 -> 'w' 입력"
                 send "w"
                 sleep 0.5
                 exp_continue
@@ -67,7 +67,7 @@ while {1} {
 
             # 2. [핵심] 버퍼 청소! (이제 clean_buffer엔 순수 텍스트만 있음)
             set clean_buffer [clean_buffer_ansi $raw_buffer]
-            log_debug "buffer = $clean_buffer"
+#            log_debug "buffer = $clean_buffer"
             # 로그에 청소된 버퍼를 찍어보면 얼마나 깔끔한지 보입니다.
             # log_debug "--- CLEAN BUFFER ---\n$clean_buffer"
 
@@ -77,43 +77,43 @@ while {1} {
             set backup_username ""
 
             foreach char {a b c d e f g h i j k l m n o p q r s t u v w x y z} {
-                
+
                 # 3. 파싱 (이제 아주 간단한 정규식으로 가능)
                 # ${char}) 뒤에 공백, 그 뒤에 아이디(\S+), ... 80x 24 ...
-                
+
                 if {[regexp "${char}\\)\\s(\\S+)\\s\\S+\\s+L\\d+\\s+\\S{4},\\s+\\S+\\s+80x 24\\s*(\[0-9msh\\s\]*)\\s\\d+" $clean_buffer match username idle_part]} {
-                    log_debug "match: $match\n username: $username\n idle_part: $idle_part\n"
+#                    log_debug "match: $match\n username: $username\n idle_part: $idle_part\n"
                     # 이미 위에서 청소를 다 했으므로 strip_ansi 호출 불필요!
                     # 바로 로직 수행
-                    
+
                     if {$username == ""} { continue }
 
                     # 블랙리스트 체크
                     if {[lsearch -exact $perm_blacklist $username] != -1} {
-                        log_debug "SKIP: '$username' (봇)"
+#                        log_debug "SKIP: '$username' (봇)"
                         continue
                     }
 
                     # 히스토리 체크
                     if {[lsearch -exact $recent_history $username] != -1} {
-                        log_debug "SKIP: '$username' (최근 본 유저)"
+#                        log_debug "SKIP: '$username' (최근 본 유저)"
                         continue
                     }
 
                     # Idle 체크 (이미 clean_buffer라 잡문자 없음)
                     set idle_str [string trim $idle_part]
-                    
+
                     if {[regexp {[0-9]+[mh]} $idle_str]} {
-                        log_debug "SKIP: '$username' (1분 이상 잠수)"
+#                        log_debug "SKIP: '$username' (1분 이상 잠수)"
                         continue
                     } elseif {[regexp {[0-9]+s} $idle_str]} {
                         if {$backup_key == ""} {
-                            log_debug "예비 대기 유저: '$username'"
+#                            log_debug "예비 대기 유저: '$username'"
                             set backup_key $char
                             set backup_username $username
                         }
                     } else {
-                        log_debug "Target found: '$username'"
+#                        log_debug "Target found: '$username'"
                         set target_key $char
                         set target_username $username
                         break
@@ -123,7 +123,7 @@ while {1} {
 
             # 진입 로직 (이하 동일)
             if {$target_key == "" && $backup_key == ""} {
-                log_debug "유저 미발견, 대기."
+#                log_debug "유저 미발견, 대기."
                 if {[llength $recent_history] > 0} {
                     puts "\n🔄 기록 리셋."
                     set recent_history {}
@@ -139,11 +139,11 @@ while {1} {
             }
 
             if {$target_key == "" && $backup_key != ""} {
-                log_debug "\n🥈 차순위 진입 ($backup_username)"
+#                log_debug "\n🥈 차순위 진입 ($backup_username)"
                 set target_key $backup_key
                 set target_username $backup_username
             } elseif {$target_key != ""} {
-                log_debug "\n🥇 유저 진입 ($target_username)"
+#                log_debug "\n🥇 유저 진입 ($target_username)"
             }
 
             if {$target_key != ""} {
@@ -154,22 +154,26 @@ while {1} {
 
                 send "$target_key"
                 expect_user -re "(.*)"
-                
+
                 interact {
-                    -o 
+                    -o
                     "=>" { return }
                     "You die..." { send "q"; return }
                     "You have escaped!" { send "q"; return }
                     "Connection to" { exit }
                     -t 30 {
-                        log_debug "\n잠수 ⏱ 30초 경과. 탈출"
+#                        log_debug "\n잠수 ⏱ 30초 경과. 탈출"
                         send "q"
                         return
                     }
                 }
             }
         }
-        "connection closed" { log_debug "연결 끊김" exit }
-        timeout { log_debug "⏱ 타임아웃"; exit }
+        "connection closed" {
+            #log_debug "연결 끊김"
+        exit }
+        timeout {
+            #log_debug "⏱ 타임아웃";
+        exit }
     }
 }

@@ -4,7 +4,7 @@ hl.monitor({ output = "HDMI-A-2", mode = "1920x1080@60", position = "2560x0", sc
 hl.on("hyprland.start", function()
     hl.exec_cmd('while true; do kitty +kitten panel --edge=background --output-name "DP-4" -o background=black -o font_size=40 $HOME/.config/hypr/scripts/watch_dcss.sh; sleep 1; done')
     hl.exec_cmd('kitten panel --edge=background --output-name "HDMI-A-2" -o background=black -o font_size=10 btop')
-    hl.exec_cmd("waybar")
+    hl.exec_cmd("bash ~/conf/quickshell/bar/start.sh")
 end)
 
 hl.bind("SUPER + F9", hl.dsp.exec_cmd("systemctl --user start sunshine.service"))

@@ -7,7 +7,7 @@ end
 exec("G", "~/.config/hypr/scripts/pwa_toggle.sh $PWA_GEMINI")
 exec("Y", "~/.config/hypr/scripts/pwa_toggle.sh $PWA_YOUTUBE")
 exec("W", "~/.config/hypr/scripts/pwa_toggle.sh $PWA_NAMUWIKI")
-exec("R", "~/.config/hypr/scripts/pwa_toggle.sh $PWA_CLAUDE")
+exec("R", "qs -p ~/conf/quickshell/agent ipc call agent toggle || qs -n -d -p ~/conf/quickshell/agent")
 exec("T", "~/.config/hypr/scripts/pwa_toggle.sh $PWA_CHATGPT")
 exec("S", "firefox")
 exec("Q", "kitty")

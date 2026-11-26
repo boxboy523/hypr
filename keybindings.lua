@@ -6,12 +6,10 @@ end
 
 exec("G", "~/.config/hypr/scripts/pwa_toggle.sh $PWA_GEMINI")
 exec("Y", "~/.config/hypr/scripts/pwa_toggle.sh $PWA_YOUTUBE")
-exec("W", "~/.config/hypr/scripts/pwa_toggle.sh $PWA_NAMUWIKI")
 exec("R", "qs -p ~/conf/quickshell/agent ipc call agent toggle || qs -n -d -p ~/conf/quickshell/agent")
 exec("T", "~/.config/hypr/scripts/pwa_toggle.sh $PWA_CHATGPT")
-exec("S", "firefox")
+exec("F", "firefox")
 exec("Q", "kitty")
-exec("F", "kitty yazi")
 exec("E", "rofi -show drun -theme ~/.config/rofi/monochrome_tui.rasi")
 exec("L", 'grim -g "$(slurp)" - | wl-copy')
 
@@ -20,6 +18,9 @@ hl.bind(main_mod .. " + M", hl.dsp.exit())
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo({ action = "toggle" }))
 hl.bind(main_mod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+hl.bind(main_mod .. " + space", hl.dsp.window.cycle_next())
+hl.bind(main_mod .. " + w",
+    hl.dsp.focus({ workspace = "e+1" }))
 
 for _, direction in ipairs({ "left", "right", "up", "down" }) do
     hl.bind(main_mod .. " + " .. direction, hl.dsp.focus({ direction = direction }))

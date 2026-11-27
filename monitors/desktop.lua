@@ -16,3 +16,8 @@ for workspace = 1, 10 do
         monitor = workspace % 2 == 1 and "DP-4" or "HDMI-A-2",
     })
 end
+
+hl.device({
+    name = "hfd-qsenn-q104",
+    kb_options = "korean:ralt_hangul,korean:rctrl_hanja,caps:none",
+})
